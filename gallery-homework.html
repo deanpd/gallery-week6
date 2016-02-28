@@ -46,7 +46,13 @@
 <body>
   
 <script>
-  
+    $("document").ready( function(){
+      // Create event bindings on ALL tab panel li buttons
+      $(".tab-panels .tabs li").on("click", function(){
+        $(".tab-panels .tabs li.active").removeClass("active");
+        $(this).addClass("active");
+      });
+    });
   
   /*
   $("document").ready(function(){
