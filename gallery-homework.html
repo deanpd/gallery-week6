@@ -47,10 +47,25 @@
   
 <script>
     $("document").ready( function(){
+      
       // Create event bindings on ALL tab panel li buttons
-      $(".tab-panels .tabs li").on("click", function(){
-        $(".tab-panels .tabs li.active").removeClass("active");
-        $(this).addClass("active");
+      $(".tab-panels .tabs li").on("click", function(){ // Finds classes "tab-panels", then "tabs", then ALL li elements. Attaches a mouse click on li elements then fires off the function literal.
+        $(".tab-panels .tabs li.active").removeClass("active");// Removes the "active" class from the li with the "actice" class.
+        $(this).addClass("active"); //(this) operates on the element the function is handling, so ".tab-panels .tabs li". Adds "active" class to whichever li is being clicked on.
+        
+        // Find which panel to show by using the current element's rel attribute.
+        // Assign the rel of the li to a variable to testing later.
+        // rel attribute in the li matches the id in each div
+        var panelToShow = $(this).attr("rel");// Assigns the attribute "rel" to the variable panelToShow
+        
+        // Hide the current panel.
+        $(".tab-panels .panel.active").slideUp(300, function(){ // Callback function: Runs the function once the slideUp finishes.
+          $(this).removeClass("active");
+          // Show the new panel.
+          $("#"+panelToShow).slideDown(300, function(){
+            $(this).addClass("active");
+          });
+        });
       });
     });
   
